@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}School Management {% endblock %}
+{% block description %}School Management{% endblock %}
+
+{% load mathfilters %}
+{% block content %}
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<div class="card" style="width: 45rem; display: inline-block;">
+						<div class="card-body">
+							<h5 class="card-title">Teachers more than 1 Lakh salary report</h5>
+							<ol>
+								<li>
+									Teachers earning more than 1 Lakh per month: <b>{{ students }}</b>
+								</li>
+								<li>
+									Salary Sum (per annum): <b>{{ sum_of_salaries }} Lakh</b> Rupees
+								</li>
+								<li>
+									Salary Sum (per month): <b>{{ sum_of_salaries | div:12 | floatformat:2 }} Lakh</b> Rupees
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="card" style="width: 45rem; display: inline-block;">
+						<div class="card-body">
+							<h5 class="card-title">More than one teacher handling subject report</h5>
+							<ol>
+								<li>
+									No. of students studying subjects with more than one faculty: <b>{{ no_of_students }}</b>
+								</li>
+								<li>
+									No. of teachers teaching subjects with more than one faculty: <b>{{ no_of_teachers }}</b>
+								</li>
+								<li>
+									Total duration: <b>{{ total_duration | div:60 }}</b> Hours
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(".nav-item").removeClass('active');
+		$(".home").addClass('active');
+	</script>
+
+{% endblock %}

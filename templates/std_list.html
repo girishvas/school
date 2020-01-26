@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Student List {% endblock %}
+{% block description %}School Management{% endblock %}
+
+{% block content %}
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Sl.No</th>
+								<th class="column2">Name</th>
+								<th class="column3">Date of join</th>
+								<th class="column3">Standard</th>
+								<th class="column3">Roll No</th>
+								<th class="column3">Ranking</th>
+								<th class="column3">Classes</th>
+								<th class="column6">Teachers</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for student in students %}
+								<tr>
+									<td class="column1">{{ forloop.counter }}</td>
+									<td class="column2">{{ student.name }}</td>
+									<td class="column3">{{ student.doj|date:"d/m/Y" }}</td>
+									<td class="column3">{{ student.standard }}</td>
+									<td class="column3">{{ student.rollNo }}</td>
+									<td class="column3">{{ student.ranking }}</td>
+									<td class="column3">
+										<ul>
+											{% for class in student.classes.all %}
+											<li>{{ class.name }}</li>
+											{% endfor %}
+										</ul>
+									</td>
+									<td class="column6">
+										<ul>
+											{% for class in student.classes.all %}
+											<li>
+												{{ class.name }}
+												<ol>
+													{% for class_subject in class.classroomsubject_set.all %}
+													<li>{{ class_subject.subject }} - <b>{{ class_subject.teacher }}</b></li>
+													{% endfor %}
+												</ol>
+											</li>
+											{% endfor %}
+										</ul>
+									</td>
+								</tr>
+							{% empty %}
+								<tr>
+									<td colspan="8" style="text-align: center;">No student found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.form-inline{
+			display: block;
+		}
+	</style>
+	<script>
+		$(".nav-item").removeClass('active');
+		$(".student").addClass('active');
+	</script>
+
+{% endblock %}

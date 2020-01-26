@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Classroom List {% endblock %}
+{% block description %}School Management{% endblock %}
+
+{% block content %}
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Sl.No</th>
+								<th class="column2">Name</th>
+								<th class="column3">Shape</th>
+								<th class="column4">Capacity</th>
+								<th class="column5">Supports Web</th>
+								<th class="column6">Subjects &amp; Teachers</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for room in room %}
+								<tr>
+									<td class="column1">{{ forloop.counter }}</td>
+									<td class="column2">{{ room.name }}</td>
+									<td class="column3">{{ room.get_shape_display }}</td>
+									<td class="column4">{{ room.capacity }}</td>
+									<td class="column5">{% if room.webSupport %} Yes {% else %} No {% endif %}</td>
+									<td class="column6">
+										<ul>
+											{% for subject in room.classroomsubject_set.all %}
+												<li>{{ subject.subject }} - {{ subject.teacher }}</li>
+											{% endfor %}
+										</ul>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(".nav-item").removeClass('active');
+		$(".class").addClass('active');
+	</script>
+
+{% endblock %}
