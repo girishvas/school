@@ -12,7 +12,7 @@ Steps to perform
 
 	source ./env/bin/activate
 
-	git pull 
+	git clone https://github.com/girishvas/school.git
 
 	cd school/
 
